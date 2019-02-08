@@ -6,3 +6,23 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    function start() {
+
+        const data = "test";
+    $.ajax({
+        url: "http://localhost:5106/cors",
+        type: "dataType",
+        data: data,
+        headers: { 'Access-Control-Allow-Origin': 'http://localhost:5106' },
+        success: function (result) {
+            console.log(result);
+        }
+        });
+    }
+
+    start();
+
+</script>
