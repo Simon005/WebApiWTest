@@ -1,5 +1,4 @@
 ﻿
-
-
-    console.log("TESTAJAX");
-
+    $("#buttonId").click(function () {
+        alert("TESTONCLICK");
+    });

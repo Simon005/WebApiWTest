@@ -6,12 +6,21 @@
 <div id="example-widget-container">WidgetFromApi</div>
 <div>
     <form action="https://localhost:44319/api/widget/SendPhoneNumber" method="post">
-        <button type="submit" class="btn btn-primary">TESTKNAPP</button>
+        <input asp-for="Name">
+        <button type="submit" class="btn btn-primary" id="buttonI1qwd">TESTKNAPP</button>
     </form>
 </div>
+<button type="button" class="btn btn-primary" id="buttonId">TESTKNAPP</button>
 
 
 @Model.js
 
 
-<script>@Model.js</script>
+<script type="application/javascript">@Model.js</script>
+<script type="application/json">
+    $(document).ready(function () {
+    console.log("TESTFROMVIEW")
+    })();
+</script>
+
+<script type="text/javascript">console.log("TESTFROMVIEW")</script>

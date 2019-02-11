@@ -47,23 +47,25 @@ namespace WebApiForBrightSales.Controllers
             string webRootPath = _hostingEnvironment.WebRootPath;
             string result = System.IO.File.ReadAllText(webRootPath + "/js/AjaxFromVidgetTest.js");
             string test = result.Replace(Environment.NewLine, string.Empty);
-            var testParse = Json(test);
+            var testParse = Json(test); 
             var javascript = new JavaScriptResult(result);
-            javascript.Content = test;
+            //javascript.Content = test;
             //var javaToString = 
             
             var renderdView = await RenderPartialViewToString("WidgetTestView", new WidgetViewModel() { js = javascript });
-            return Content(renderdView, "text/html");
+            var newModel = new TestModel() { ViewAsString = renderdView, JavascriptTest = javascript};
+
+            return Json(newModel);
             return View("WidgetTestView");
             //return new string[] { "value1", "value2" };
         }
 
         [HttpPost]
         [Route("/api/[controller]/SendPhoneNumber")]
-        public IActionResult SendPhoneNumber(string number)
+        public IActionResult SendPhoneNumber(WidgetViewModel model)
         {
             var x = 10;
-            return Content("<h1> SENDPHONENUMBER</h1>");
+            return Content(model.Name);
         }
 
         [HttpGet]

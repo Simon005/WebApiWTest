@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WebApiForBrightSales.Models
 {
-    public class WidgetViewModel
+    public class TestModel
     {
-        public ContentResult js { get; set; }
 
-        public string Name { get; set; }
+        public string ViewAsString { get; set; }
+        public ContentResult JavascriptTest { get; set; }
 
     }
 }

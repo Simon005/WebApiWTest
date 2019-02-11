@@ -54,9 +54,11 @@
                 type: "GET",
                 success: function (result) {
                     console.log("test");
-                    console.log(result);
                     $("#example-widget-container").css({ "background-color": "red", "width": "200px", "height": "100px" });
-                }
+                },
+                complete: function () {
+                    console.log("onComplete");
+                    }
 
 
             });
