@@ -62,10 +62,10 @@ namespace WebApiForBrightSales.Controllers
 
         [HttpPost]
         [Route("/api/[controller]/SendPhoneNumber")]
-        public IActionResult SendPhoneNumber(WidgetViewModel model)
+        public IActionResult SendPhoneNumber(WidgetViewModel data)
         {
             var x = 10;
-            return Content(model.Name);
+            return Content(data.PhoneNumber);
         }
 
         [HttpGet]
