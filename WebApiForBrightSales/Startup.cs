@@ -31,8 +31,17 @@ namespace WebApiForBrightSales
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddCors(o =>
+            {
+                o.AddPolicy("allowTest",
+                c => c.WithOrigins("http://localhost:5106", "https://localhost:44316")
+                .WithMethods("GET", "POST")
+                .AllowAnyHeader());
+            }
+            );
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddTransient<IHostingEnvironment>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

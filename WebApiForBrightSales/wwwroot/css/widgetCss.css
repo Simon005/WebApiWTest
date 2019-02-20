@@ -1,0 +1,19 @@
+﻿
+.cssClass {
+    position: fixed;
+    top: 10%;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    z-index: 1040;
+    width:380px;
+    border:1px solid green;
+    border-radius:10%;
+    background-color:rgba(59, 194, 59, 0.64);
+    height:150px;
+}
+
+    .cssClass h5 {
+        color: gold;
+        font-size: 18px;
+    }

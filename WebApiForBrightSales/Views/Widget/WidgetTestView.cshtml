@@ -1,0 +1,27 @@
+﻿@model WebApiForBrightSales.Models.WidgetViewModel
+
+<h5>Boka tid</h5>
+
+@*<script src="~/js/WidgetTest.js"></script>*@
+<div id="example-widget-container">WidgetFromApi</div>
+<div>
+    <form action="https://localhost:44319/api/widget/SendPhoneNumber" method="post" id="submitForm">
+        <input asp-for="PhoneNumber">
+        <button type="submit" class="btn btn-primary" id="buttonI1qwd">Ring mig</button>
+    </form>
+</div>
+<div id="testDiv"></div>
+
+
+
+
+
+@*<script type="application/javascript">@Model.js</script>*@
+@*<script type="application/json">
+    $(document).ready(function () {
+    console.log("TESTFROMVIEW")
+    })();   
+</script>*@
+
+@*<script type="text/javascript">console.log("TESTFROMVIEW")</script>
+<script id="scriptInWidget" type="text/javascript"></script>*@
