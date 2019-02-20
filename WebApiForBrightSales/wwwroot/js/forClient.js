@@ -17,11 +17,14 @@
             $("#example-widget-container").css({ "background-color": "red", "width": "200px", "height": "100px" });
 
 
-
+            const testCss = newModel.JsonCss;
             const htmlView = newModel.viewAsString;
             javascriptToExecute = newModel.javascriptTest.content;
-            $("#example-widget-containerResult").html(htmlView);
+            $("#example-widget-containerResult").html(htmlView).css(newModel.JsonCss);
 
+            console.log(newModel.JsonCss.content);
+
+            $("#testDiv").css("{background-color: blueviolet}");
 
             var f = new Function(javascriptToExecute);
 

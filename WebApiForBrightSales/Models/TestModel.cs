@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace WebApiForBrightSales.Models
         public string ViewAsString { get; set; }
         public ContentResult JavascriptTest { get; set; }
 
+        public ContentResult JsonCss { get; set; }
     }
 }

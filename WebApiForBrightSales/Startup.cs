@@ -34,12 +34,11 @@ namespace WebApiForBrightSales
             services.AddCors(o =>
             {
                 o.AddPolicy("allowTest",
-                c => c.WithOrigins("http://localhost:5106")
+                c => c.WithOrigins("http://localhost:5106", "https://localhost:44316")
                 .WithMethods("GET", "POST")
                 .AllowAnyHeader());
             }
             );
-        //http://localhost:5106
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             //services.AddTransient<IHostingEnvironment>();

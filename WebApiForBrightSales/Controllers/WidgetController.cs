@@ -15,6 +15,11 @@ using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 using WebApiForBrightSales.Models;
+using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
+using Twilio;
+using Twilio.Types;
+using Twilio.Rest.Api.V2010.Account;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,45 +31,60 @@ namespace WebApiForBrightSales.Controllers
     {
         private IHostingEnvironment _hostingEnvironment;
         private ICompositeViewEngine _viewEngine;
+        IConfiguration _configuration;
 
 
-        public WidgetController(IHostingEnvironment hostingEnvironment, ICompositeViewEngine compositeViewEngine)
+        public WidgetController(IHostingEnvironment hostingEnvironment, ICompositeViewEngine compositeViewEngine, IConfiguration configuration)
         {
             _viewEngine = compositeViewEngine;
             _hostingEnvironment = hostingEnvironment;
+            _configuration = configuration;
         }
 
         // GET: api/<controller>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-
-
-            //Auth
+            string webRootPath = _hostingEnvironment.WebRootPath;
 
             //Get script 
 
-            string webRootPath = _hostingEnvironment.WebRootPath;
             string result = System.IO.File.ReadAllText(webRootPath + "/js/AjaxFromVidgetTest.js");
             string test = result.Replace(Environment.NewLine, string.Empty);
-            var testParse = Json(test); 
             var javascript = new JavaScriptResult(result);
-            //javascript.Content = test;
-            //var javaToString = 
+
+            //Get css
+
+            string cssResult = System.IO.File.ReadAllText(webRootPath + "/css/widgetCss.css");
+            string cssWithoutEmptyLines = cssResult.Replace(Environment.NewLine, string.Empty);
+            var cssWELAndJsResult = new JavaScriptResult(cssWithoutEmptyLines);
+
+            //var jsCssJsonResult = JsonConvert.SerializeObject(cssResult);
+            //var jsCss = new JavaScriptResult(cssResult);
             
-            var renderdView = await RenderPartialViewToString("WidgetTestView", new WidgetViewModel() { js = javascript });
-            var newModel = new TestModel() { ViewAsString = renderdView, JavascriptTest = javascript};
+            var renderdView = await RenderPartialViewToString("WidgetTestView", new WidgetViewModel());
+            var newModel = new TestModel() { ViewAsString = renderdView, JavascriptTest = javascript, JsonCss = cssWELAndJsResult};
 
             return Json(newModel);
-            return View("WidgetTestView");
-            //return new string[] { "value1", "value2" };
         }
 
         [HttpPost]
         [Route("/api/[controller]/SendPhoneNumber")]
         public IActionResult SendPhoneNumber(WidgetViewModel data)
-        {
-            var x = 10;
+            {
+
+            var accountSid = _configuration.GetConnectionString("TwilioAccountSid");
+            var authToken = _configuration.GetConnectionString("TwilioAuthToken");
+            TwilioClient.Init(accountSid, authToken);
+
+
+            //Trial account
+            var to = new PhoneNumber("+46736142577");
+            var from = new PhoneNumber("+46705448629");
+
+            var call = CallResource.Create(to, from,
+                url: new Uri("http://demo.twilio.com/docs/voice.xml"));
+
             return Content(data.PhoneNumber);
         }
 

@@ -7,8 +7,6 @@
 $("#submitForm").on('submit', function (event) {
     event.preventDefault();
 
-    var datas = $("#submitForm").serialize();
-
     $.ajax({
         url: "https://localhost:44319/api/widget/SendPhoneNumber",
         method: "POST",
@@ -18,7 +16,7 @@ $("#submitForm").on('submit', function (event) {
         success: function (newModel) {
             console.log("test");
             //console.log(phoneNumber);
-            $("#example-widget-container").css({ "background-color": "green", "width": "200px", "height": "100px" });
+            $("#example-widget-containerResult");
 
             console.log(newModel);
         }
@@ -28,36 +26,3 @@ $("#submitForm").on('submit', function (event) {
 
 });
 
-//$("#buttonI1qwd").on('submit', function (event) {
-//    event.preventDefault();
-
-//    $.ajax({
-//        url: "https://localhost:44319/api/widget",
-//        method: "GET",
-//        type: "json",
-//        data: { },
-//        headers: { 'Access-Control-Allow-Origin': "*" },
-//        success: function (newModel) {
-//            console.log(data);
-//            console.log("test");
-//            console.log(phoneNumber);
-//            $("#example-widget-container").css({ "background-color": "green", "width": "200px", "height": "100px" });
-
-
-//        }
-
-//    });
-
-
-//});
-
-
-
-
-    //function getClicks() {
-    //    console.log("TESTFROM GET CLICK FUNCTION");
-
-
-    //}
-
-    //getClicks();
